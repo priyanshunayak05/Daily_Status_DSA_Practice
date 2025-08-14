@@ -1,49 +1,60 @@
-// Last updated: 8/14/2025, 11:13:47 AM
+// Last updated: 8/14/2025, 12:01:24 PM
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
  *     int val;
  *     TreeNode left;
  *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
+ *     TreeNode(int x) { val = x; }
  * }
  */
-class Solution {
-    public int widthOfBinaryTree(TreeNode root) {
-        Queue<Pair>q=new LinkedList<>();
-        int width=0;
-        q.add(new Pair(root,0));
-        while(!q.isEmpty()){
-            Pair start=q.peek();
-            int s=q.size();
-            Pair end=null;
-            for(int i=0;i<s;i++){
-                end=q.poll();
-                if(end.node.left!=null){
-                    q.add(new Pair (end.node.left,2*end.idx+1));
-                }
-                if(end.node.right!=null){
-                    q.add(new Pair (end.node.right,2*end.idx+2));
-                }
-            }
-            width=Math.max(width,end.idx-start.idx+1);
-        }
-        return width;
-        
+public class Codec {
+
+    // Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
+        StringBuilder sb=new StringBuilder();
+        build(root,sb);
+        return sb.toString();
     }
-}
-class Pair{
-    TreeNode node;
-    int idx;
-    public Pair(TreeNode node,int idx){
-        this.idx=idx;
-        this.node=node;
+    private void build(TreeNode root,StringBuilder sb){
+        if(root == null){
+            sb.append("null,");
+            return;
+
+        }
+        sb.append(root.val+",");
+        build(root.left,sb);
+        build(root.right,sb);
+    }
+
+
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        if(data ==null || data.isEmpty()){
+            return null;
+        }
+        String [] arr=data.split(",");
+        return parse(arr);
+
+    }
+    int idx=0;
+    public TreeNode parse(String[] arr){
+        if(idx>=arr.length){
+            return null;
+        }
+        String s=arr[idx++];
+        if(s.equals("null")){
+            return null;
+        }
+        TreeNode node=new TreeNode(Integer.parseInt(s));
+        node.left=parse(arr);
+        node.right=parse(arr);
+        return node;
 
     }
 }
+
+// Your Codec object will be instantiated and called as such:
+// Codec ser = new Codec();
+// Codec deser = new Codec();
+// TreeNode ans = deser.deserialize(ser.serialize(root));
