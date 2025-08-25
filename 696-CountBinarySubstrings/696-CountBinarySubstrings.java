@@ -1,22 +1,16 @@
-// Last updated: 8/25/2025, 10:45:00 PM
+// Last updated: 8/25/2025, 11:29:51 PM
 class Solution {
-    public int countBinarySubstrings(String s) {
-        int count=0;
-        int index=1;
-        int prev=0;
-        int curr=1;
-
-        while(index<s.length()){
-            if(s.charAt(index-1)!=s.charAt(index)){
-                count +=Math.min(prev,curr);
-                prev=curr;
-                curr=1;
+    public String breakPalindrome(String palindrome) {
+        char[]cstr=palindrome.toCharArray();
+        if(cstr.length<2) return "";
+        for(int i=0;i<cstr.length/2;i++){
+            if(cstr[i]!='a'){
+                cstr[i]='a';
+                return String.valueOf(cstr);
             }
-            else{
-                curr++;
-            }
-            index++;
         }
-        return count +=Math.min(prev,curr);
+        cstr[cstr.length-1]='b';
+        return String.valueOf(cstr);
+        
     }
 }
