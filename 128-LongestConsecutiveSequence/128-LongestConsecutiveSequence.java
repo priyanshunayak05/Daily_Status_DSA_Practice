@@ -1,4 +1,4 @@
-// Last updated: 8/27/2025, 12:47:11 PM
+// Last updated: 8/27/2025, 12:49:43 PM
 class Solution {
     public int longestConsecutive(int[] arr) {
         Set<Integer>s=new HashSet<>();
