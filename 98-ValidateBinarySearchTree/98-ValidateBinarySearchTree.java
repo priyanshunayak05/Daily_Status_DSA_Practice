@@ -1,4 +1,4 @@
-// Last updated: 8/14/2025, 11:18:50 AM
+// Last updated: 8/29/2025, 8:18:41 PM
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -16,25 +16,11 @@
  */
 class Solution {
     public boolean isValidBST(TreeNode root) {
-        return ValidBST(root).isbst;
+        return isvalid(root,Long.MIN_VALUE, Long.MAX_VALUE);
     }
-    public BstPair ValidBST(TreeNode root){
-        if(root ==null){
-            return new BstPair();
-        }
-
-        BstPair lbp=ValidBST(root.left);
-        BstPair rbp=ValidBST(root.right);
-        BstPair sbp=new BstPair();
-        sbp.min=Math.min(lbp.min,Math.min(rbp.min,root.val));
-        sbp.max=Math.max(lbp.max,Math.max(rbp.max,root.val));
-        sbp.isbst=lbp.isbst && rbp.isbst && lbp.max < root.val && rbp.min >root.val;
-        return sbp;
-    }
-    class BstPair{
-        boolean isbst=true;
-        Long max=Long.MIN_VALUE;
-        Long min=Long.MAX_VALUE;
-
+    public boolean isvalid(TreeNode root, long min,long max){
+        if(root==null) return true;
+        if(root.val>=max || root.val<=min) return false;
+        return isvalid(root.left,min,root.val) && isvalid(root.right,root.val,max);
     }
 }
