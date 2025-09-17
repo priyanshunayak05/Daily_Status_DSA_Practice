@@ -1,6 +1,7 @@
-// Last updated: 9/18/2025, 12:57:54 AM
+// Last updated: 9/18/2025, 1:00:27 AM
 class Solution {
     public int numberOfSubarrays(int[] nums, int k) {
+        // Trick: count(sum == goal) = atMost(goal) - atMost(goal - 1)
         return atmost(nums,k) - atmost(nums,k-1);
     }
     public static int atmost(int []nums,int goal){
