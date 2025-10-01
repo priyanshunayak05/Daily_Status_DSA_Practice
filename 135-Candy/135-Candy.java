@@ -1,4 +1,4 @@
-// Last updated: 10/1/2025, 3:50:30 PM
+// Last updated: 10/1/2025, 3:50:55 PM
 class Solution {
     public int candy(int[] ratings) {
         int n=ratings.length;
