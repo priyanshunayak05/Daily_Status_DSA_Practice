@@ -1,32 +1,27 @@
-// Last updated: 10/4/2025, 3:26:32 PM
+// Last updated: 10/4/2025, 10:00:27 PM
 class Solution {
-    public boolean exist(char[][] board, String word) {
-        for(int i=0;i<board.length;i++){
-            for(int j=0;j<board[0].length;j++){
-                if(search(board,i,j,0,word)){
-                    return true;
-                }
-            }
+    public int uniquePaths(int m, int n) {
+        int [][]dp=new int[m][n];
+        for(int[] row:dp){
+            Arrays.fill(row,-1);
         }
-        return false;
+       return search(0,0,m,n,dp);
+
     }
-    public static boolean search(char[][]board,int i,int j,int idx,String wrd){
-        if(idx==wrd.length()){
-            return true;
+    public static int search(int i,int j,int m,int n,int[][]dp){
+        if(i>=m || j>=n){
+            return 0;
         }
-        if(i<0 || i>=board.length || j<0 || j>=board[0].length) return false;
+        if(i==m-1 && j==n-1){
+            return 1;
+        }
+        if(dp[i][j]!=-1){
+            return dp[i][j];
+        }
+
+        return dp[i][j]=search(i+1,j,m,n,dp)+search(i,j+1,m,n,dp);
+       
         
-        if(board[i][j]!=wrd.charAt(idx)){
-            return false;
-        }
-
-        char temp=board[i][j];
-
-        board[i][j]='#';
-
-        boolean full =(search(board ,i,j+1,idx+1,wrd) || search(board,i,j-1,idx+1,wrd) ||search(board ,i+1,j,idx+1,wrd) ||search(board ,i-1,j,idx+1,wrd));
-
-        board[i][j]=temp;
-        return full;
+        
     }
 }
