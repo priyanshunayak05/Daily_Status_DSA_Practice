@@ -1,37 +1,33 @@
-// Last updated: 8/1/2025, 1:57:40 PM
+// Last updated: 10/5/2025, 3:38:33 PM
 class Solution {
-    public List<List<String>> partition(String s) {
-        List<List<String>> ans = new ArrayList<>();
-		List<String> ll = new ArrayList<>();
-		Partitioning(s, ll, ans);
-		return ans;
+    public int getMaximumGold(int[][] grid) {
+        int max=0;
+        int m=grid.length;
+        int n=grid[0].length;
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(grid[i][j]!=0){
+                    max =Math.max(max,dfs(i,j,grid));
+                }
+            }
+        }
+        return max;
+        
     }
-    public static void Partitioning(String ques, List<String> ll,           List<List<String>> ans) {
-		if (ques.length() == 0) {
-//			System.out.println(ll);
-			ans.add(new ArrayList<String>(ll));
-			return;
-		}
-		for (int cut = 1; cut <= ques.length(); cut++) {
-			String s = ques.substring(0, cut);
-			if (isPalindromic(s)) {
-				ll.add(s);
-				Partitioning(ques.substring(cut), ll, ans);
-				ll.remove(ll.size() - 1);
-			}
-		}
-	}
-	public static boolean isPalindromic(String s) {
-		int i = 0;
-		int j = s.length() - 1;
-		while (i < j) {
-			if (s.charAt(i) != s.charAt(j)) {
-				return false;
-			}
-			i++;
-			j--;
-		}
-		return true;
-	}
+    public static int dfs(int i,int j,int[][]grid){
+        int m=grid.length;
+        int n=grid[0].length;
+        if(i<0 || j<0 || i>=m || j>=n || grid[i][j]==0){
+            return 0;
+        }
+        int temp=grid[i][j];
+        grid[i][j]=0;
+        int max1=Math.max((temp+dfs(i,j+1,grid)),(temp+dfs(i,j-1,grid)));
+        int max2=Math.max((temp+dfs(i-1,j,grid)),(temp+dfs(i+1,j,grid)));
+        int max=Math.max(max1,max2);
 
+        grid[i][j]=temp;
+
+        return max;
+    }
 }
