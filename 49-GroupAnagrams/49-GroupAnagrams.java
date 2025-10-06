@@ -1,22 +1,28 @@
-// Last updated: 10/6/2025, 11:44:47 PM
-class Solution {
-    public int evalRPN(String[] tokens) {
-        Stack<Integer> stack = new Stack<>();
+// Last updated: 10/6/2025, 11:52:02 PM
+class StockSpanner {
+    List<Integer> prices;
 
-        for (String token : tokens) {
-            if (token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/")) {
-                int b = stack.pop();  
-                int a = stack.pop();  
-                int res = 0;
-                if (token.equals("+")) res = a + b;
-                else if (token.equals("-")) res = a - b;
-                else if (token.equals("*")) res = a * b;
-                else res = a / b;  
-                stack.push(res);
-            } else {
-                stack.push(Integer.parseInt(token));
-            }
+    public StockSpanner() {
+        prices = new ArrayList<>();
+    }
+
+    public int next(int price) {
+        prices.add(price);
+        int span = 1;
+        int i = prices.size() - 2;
+
+        // Count backward until a price > current price
+        while (i >= 0 && prices.get(i) <= price) {
+            span++;
+            i--;
         }
-        return stack.pop();
+        return span;
     }
 }
+
+
+/**
+ * Your StockSpanner object will be instantiated and called as such:
+ * StockSpanner obj = new StockSpanner();
+ * int param_1 = obj.next(price);
+ */
