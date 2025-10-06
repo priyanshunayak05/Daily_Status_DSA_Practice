@@ -1,24 +1,25 @@
-// Last updated: 10/6/2025, 11:52:02 PM
+// Last updated: 10/6/2025, 11:54:35 PM
 class StockSpanner {
-    List<Integer> prices;
+    Stack<int[]> stack; 
 
     public StockSpanner() {
-        prices = new ArrayList<>();
+        stack = new Stack<>();
     }
 
     public int next(int price) {
-        prices.add(price);
         int span = 1;
-        int i = prices.size() - 2;
 
-        // Count backward until a price > current price
-        while (i >= 0 && prices.get(i) <= price) {
-            span++;
-            i--;
+        
+        while (!stack.isEmpty() && stack.peek()[0] <= price) {
+            span += stack.pop()[1];
         }
+
+       
+        stack.push(new int[]{price, span});
         return span;
     }
 }
+
 
 
 /**
