@@ -1,25 +1,13 @@
-// Last updated: 9/26/2025, 10:22:11 PM
+// Last updated: 10/7/2025, 3:48:34 PM
 class Solution {
-    public long minimumTime(int[] time, int totalTrips) {
-        long l=0;
-        long r=100000000000000L;
-        long ans=r;
-        while(l<r){
-            long mid=(l+r)/2;
-            long count=0;
-            for(int i=0;i<time.length;i++){
-                count +=mid/time[i];
-                
-            }
-            if(count >=totalTrips){
-                    ans=Math.min(ans,mid);
-                    r=mid;
-                }
-                else{
-                    l=mid+1;
-                }
+    public int minPairSum(int[] nums) {
+        int max=0;
+        int n=nums.length;
+        Arrays.sort(nums);
+        for(int i=0;i<n/2;i++){
+            int sum =nums[i]+nums[n-1-i];
+            max=Math.max(max,sum);
         }
-        return ans;
-        
+        return max;
     }
 }
