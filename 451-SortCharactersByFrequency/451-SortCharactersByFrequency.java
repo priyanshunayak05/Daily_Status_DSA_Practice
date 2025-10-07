@@ -1,27 +1,18 @@
-// Last updated: 9/28/2025, 12:19:23 PM
+// Last updated: 10/7/2025, 4:26:30 PM
 class Solution {
-    public String frequencySort(String s) {
-        
-        StringBuilder ans=new StringBuilder();
-        HashMap<Character,Integer>map=new HashMap<>();
-
-        // to char Array
-        for(char c:s.toCharArray()){
-            map.put(c,map.getOrDefault(c,0)+1);
-        }
-
-        // sort by frequency
-        List<Character>chars=new ArrayList<>(map.keySet());
-        chars.sort((a,b) -> map.get(b)-map.get(a));
-
-        // string builder
-        for(char c:chars){
-            int freq=map.get(c);
-            for(int i=0;i<freq;i++){
-                ans.append(c);
+    public int partitionArray(int[] nums, int k) {
+        int n=nums.length;
+        Arrays.sort(nums);
+        int c=1;
+        int prev=nums[0];
+        for(int i=1;i<n;i++){
+            if(nums[i]-prev >k){
+                c++;
+                prev=nums[i];
             }
+                
         }
-
-        return ans.toString();
+        return c;
+        
     }
 }
