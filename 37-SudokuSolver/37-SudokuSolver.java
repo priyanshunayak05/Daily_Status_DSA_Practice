@@ -1,33 +1,33 @@
-// Last updated: 10/8/2025, 11:20:08 AM
+// Last updated: 10/8/2025, 11:55:33 AM
 class Solution {
-    public void solveSudoku(char[][] board) {
-        solve(board);
-        
-    }
-    boolean solve(char board[][]){
-        for(int i=0;i<9;i++){
-            for(int j=0;j<9;j++){
-                if(board[i][j]=='.'){
-                    for(char ch='1';ch<='9';ch++){
-                        if(check(board,i,j,ch)){
-                            board[i][j]=ch;
-                            if(solve(board)) return true;
-                            board[i][j]='.';
-                        }
-                    }
+    public boolean isValidSudoku(char[][] board) {
+    for(int i=0;i<9;i++){
+        for(int j=0;j<9;j++){
+            char ch=board[i][j];
+            if(ch !='.'){
+                board[i][j]='.';
+                if(!check(board,i,j,ch)){
                     return false;
                 }
+              
             }
+                
+            }
+            
         }
         return true;
-
     }
-    boolean check(char board[][],int r,int c,char ch){
+    boolean check(char[][]board,int r,int c,char ch){
+        //row
         for(int i=0;i<9;i++){
             if(board[r][i]==ch) return false;
-            if(board[i][c]==ch) return false;
         }
+        //col
+        for(int i=0;i<9;i++){
+            if(board[i][c]==ch) return false;
 
+        }
+        //3*3 matrix
         int sr=r/3*3;
         int sc=c/3*3;
 
