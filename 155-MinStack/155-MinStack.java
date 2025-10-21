@@ -1,42 +1,44 @@
-// Last updated: 10/21/2025, 7:03:57 PM
-class MinStack {
-    public Stack<Integer>stack;
-    public Stack<Integer>minstack;
-    public MinStack() {
-    stack=new Stack<>();
-    minstack=new Stack<>();
+// Last updated: 10/21/2025, 7:32:03 PM
+class MyStack {
+    public Queue<Integer>q1;
+    public Queue<Integer>q2;
+
+    public MyStack() {
+        q1=new LinkedList<>();
+        q2=new LinkedList<>();
     }
     
-    public void push(int val) {
-        stack.push(val);
-        if(minstack.isEmpty() || val<=minstack.peek()){
-            minstack.push(val);
+    public void push(int x) {
+        q2.offer(x);
+        while(!q1.isEmpty()){
+            q2.offer(q1.poll());
         }
-        else{
-            minstack.push(minstack.peek());
-        }
-    }
-    
-    public void pop() {
-        stack.pop();
-        minstack.pop();
-    }
-    
-    public int top() {
-        return stack.peek();
+        Queue<Integer>temp=q1;
+        q1=q2;
+        q2=temp;
         
     }
     
-    public int getMin() {
-        return minstack.peek();
+    public int pop() {
+        return q1.poll();
+        
+    }
+    
+    public int top() {
+        return q1.peek();
+        
+    }
+    
+    public boolean empty() {
+        return q1.isEmpty();
     }
 }
 
 /**
- * Your MinStack object will be instantiated and called as such:
- * MinStack obj = new MinStack();
- * obj.push(val);
- * obj.pop();
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack obj = new MyStack();
+ * obj.push(x);
+ * int param_2 = obj.pop();
  * int param_3 = obj.top();
- * int param_4 = obj.getMin();
+ * boolean param_4 = obj.empty();
  */
