@@ -1,27 +1,31 @@
-// Last updated: 10/23/2025, 11:33:42 PM
+// Last updated: 10/24/2025, 8:46:01 PM
 class Solution {
-    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
-        int n = nums1.length;
-        int n2 = nums2.length;
-        int[] arr = new int[n];
-        
-        for (int i = 0; i < n; i++) {
-            boolean found = false;  
-            int next = -1;          
-            
-            for (int j = 0; j < n2; j++) {
-                
-                if (nums1[i] == nums2[j]) {
-                    found = true;
+    public String decodeString(String s) {
+        Stack<Integer> numStack = new Stack<>();
+        Stack<String> strStack = new Stack<>();
+        String currentString = "";
+        int num = 0;
+
+        for (char c : s.toCharArray()) {
+            if (Character.isDigit(c)) {
+                num = num * 10 + (c - '0'); 
+            } else if (c == '[') {
+                numStack.push(num);
+                strStack.push(currentString);
+                num = 0;
+                currentString = "";
+            } else if (c == ']') {
+                int times = numStack.pop();
+                StringBuilder temp = new StringBuilder(strStack.pop());
+                for (int i = 0; i < times; i++) {
+                    temp.append(currentString);
                 }
-                // after we find it, check right side for greater element
-                if (found && nums2[j] > nums1[i]) {
-                    next = nums2[j];
-                    break;
-                }
+                currentString = temp.toString();
+            } else {
+                currentString += c;
             }
-            arr[i] = next;
         }
-        return arr;
+
+        return currentString;
     }
 }
