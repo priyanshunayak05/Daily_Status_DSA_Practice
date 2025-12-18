@@ -1,4 +1,4 @@
-// Last updated: 12/18/2025, 11:03:25 PM
+// Last updated: 12/18/2025, 11:03:45 PM
 1class Solution {
 2    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
 3        int []arr=new int[nums1.length+nums2.length];
