@@ -1,4 +1,4 @@
-// Last updated: 12/23/2025, 8:09:53 PM
+// Last updated: 12/24/2025, 8:00:59 PM
 1class Solution {
 2    public int findMinimumOperations(String s1, String s2, String s3) {
 3        int minLen = Math.min(s1.length(), Math.min(s2.length(), s3.length()));
