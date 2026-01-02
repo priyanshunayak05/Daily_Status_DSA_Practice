@@ -1,4 +1,4 @@
-// Last updated: 12/31/2025, 11:19:19 AM
+// Last updated: 1/2/2026, 3:33:35 PM
 1class Solution {
 2    public boolean canFinish(int numCourses, int[][] prerequisites) {
 3        List<List<Integer>>adj=new ArrayList<>();
