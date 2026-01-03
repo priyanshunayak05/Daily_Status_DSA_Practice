@@ -1,47 +1,53 @@
-// Last updated: 12/29/2025, 3:11:30 PM
-1import java.util.*;
-2
-3class Solution {
-4    public int orangesRotting(int[][] grid) {
-5        Queue<int[]> q = new LinkedList<>();
-6        int fresh = 0;
-7
-8        // Step 1: collect rotten oranges & count fresh
-9        for (int i = 0; i < grid.length; i++) {
-10            for (int j = 0; j < grid[0].length; j++) {
-11                if (grid[i][j] == 2) q.offer(new int[]{i, j});
-12                if (grid[i][j] == 1) fresh++;
-13            }
-14        }
-15
-16        int minutes = 0;
-17        int[][] dirs = {{1,0},{-1,0},{0,1},{0,-1}};
-18
-19        // Step 2: BFS
-20        while (!q.isEmpty() && fresh > 0) {
-21            int size = q.size();
-22            minutes++;
-23
-24            for (int i = 0; i < size; i++) {
-25                int[] cell = q.poll();
-26
-27                for (int[] d : dirs) {
-28                    int r = cell[0] + d[0];
-29                    int c = cell[1] + d[1];
-30
-31                    if (r >= 0 && r < grid.length &&
-32                        c >= 0 && c < grid[0].length &&
-33                        grid[r][c] == 1) {
-34
-35                        grid[r][c] = 2;
-36                        fresh--;
-37                        q.offer(new int[]{r, c});
-38                    }
-39                }
-40            }
-41        }
-42
-43        return fresh == 0 ? minutes : -1;
-44    }
-45}
-46
+// Last updated: 1/4/2026, 1:01:05 AM
+1class Solution {
+2    public int orangesRotting(int[][] grid) {
+3        int n=grid.length;
+4        int m=grid[0].length;
+5        int ans=0;
+6
+7        Queue<int[]>q=new LinkedList<>();
+8        boolean [][]vis=new boolean[n][m];
+9
+10        for(int i=0;i<n;i++){
+11            for(int j=0;j<m;j++){
+12                if(grid[i][j]==2){
+13                    q.add(new int[]{i,j,0});
+14                    vis[i][j]=true;
+15                }
+16            }
+17        }
+18        while(!q.isEmpty()){
+19            int []curr=q.poll();
+20            int i=curr[0];
+21            int j=curr[1];
+22            int t=curr[2];
+23            ans=Math.max(ans,t);
+24            if(i-1 >=0 && !vis[i-1][j] && grid[i-1][j]==1){
+25                q.add(new int[]{i-1,j,t+1});
+26                vis[i-1][j]=true;
+27            }
+28            if(i+1 <n && !vis[i+1][j] && grid[i+1][j]==1){
+29                q.add(new int[]{i+1,j,t+1});
+30                vis[i+1][j]=true;
+31            }
+32            if(j-1 >=0 && !vis[i][j-1] && grid[i][j-1]==1){
+33                q.add(new int[]{i,j-1,t+1});
+34                vis[i][j-1]=true;
+35            }
+36            if(j+1 <m && !vis[i][j+1] && grid[i][j+1]==1){
+37                q.add(new int[]{i,j+1,t+1});
+38                vis[i][j+1]=true;
+39            }
+40        }
+41        for(int i=0;i<n;i++){
+42            for(int j=0;j<m;j++){
+43                if(grid[i][j]==1 && !vis[i][j]){
+44                    return -1;
+45                }
+46            }
+47        }
+48        return ans;
+49        
+50
+51    }
+52}
