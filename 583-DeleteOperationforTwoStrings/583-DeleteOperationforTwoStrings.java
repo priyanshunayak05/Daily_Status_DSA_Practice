@@ -1,4 +1,4 @@
-// Last updated: 12/20/2025, 7:17:01 PM
+// Last updated: 1/11/2026, 8:47:49 PM
 1class Solution {
 2    public int minDistance(String word1, String word2) {
 3        int m = word1.length();
