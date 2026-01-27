@@ -1,69 +1,27 @@
-// Last updated: 1/27/2026, 2:43:41 PM
-1class MyCircularQueue {
-2    int size;
-3    int count;
-4    Queue<Integer>q;
-5
-6    public MyCircularQueue(int k) {
-7        size=k;
-8        count=0;
-9        q=new LinkedList<>();
-10        
-11    }
-12    
-13    public boolean enQueue(int value) {
-14        if(count==size)return false;
-15        count++;
-16        q.add(value);
-17        return true;
-18        
-19    }
-20    
-21    public boolean deQueue() {
-22        if(count==0){
-23            return false;
-24        }
-25        count--;
-26        q.poll();
-27        return true;
-28        
-29    }
-30    
-31    public int Front() {
-32        if(count==0)return -1;
-33
-34        return q.peek();
-35        
-36    }
-37    
-38    public int Rear() {
-39        if (count==0)return -1;
-40        LinkedList<Integer> list = (LinkedList<Integer>) q;
-41        return list.getLast();
-42
-43        
-44    }
-45    
-46    public boolean isEmpty() {
-47        return count==0;
-48        
-49    }
-50    
-51    public boolean isFull() {
-52        return count==size;
-53
-54
-55        
-56    }
-57}
-58
-59/**
-60 * Your MyCircularQueue object will be instantiated and called as such:
-61 * MyCircularQueue obj = new MyCircularQueue(k);
-62 * boolean param_1 = obj.enQueue(value);
-63 * boolean param_2 = obj.deQueue();
-64 * int param_3 = obj.Front();
-65 * int param_4 = obj.Rear();
-66 * boolean param_5 = obj.isEmpty();
-67 * boolean param_6 = obj.isFull();
-68 */
+// Last updated: 1/27/2026, 2:51:10 PM
+1class Solution {
+2    public boolean isZeroArray(int[] nums, int[][] queries) {
+3        int n=nums.length;
+4        int[]diff=new int[n+1];
+5        for(int i = 0; i < queries.length; i++){
+6
+7            int l = queries[i][0];
+8            int r = queries[i][1];
+9
+10            diff[l] +=1;
+11            if(r+1 <n){
+12                diff[r+1] -=1;
+13            }
+14
+15        }
+16
+17        int cum=0;
+18        for(int i=0;i<n;i++){
+19            cum +=diff[i];
+20
+21            if(nums[i]>cum)return false;
+22        }
+23
+24        return true;
+25    }
+26}
