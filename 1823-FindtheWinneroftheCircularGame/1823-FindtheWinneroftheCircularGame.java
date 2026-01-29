@@ -1,16 +1,25 @@
-// Last updated: 1/29/2026, 12:38:34 PM
+// Last updated: 1/29/2026, 1:12:31 PM
 1class Solution {
-2    public int findTheWinner(int n, int k) {
-3        ArrayList<Integer>ls=new ArrayList<>();
-4        for(int i=1;i<=n;i++){
-5            ls.add(i);
-6        }
-7
-8        int idx=0;
-9        while(ls.size()>1){
-10            idx=(idx+k-1)%ls.size();
-11            ls.remove(idx);
-12        }
-13        return ls.get(0);
-14    }
-15}
+2    public int minOperations(int[] nums) {
+3        int count=0;
+4        for(int i=0;i<=nums.length-3;i++){
+5
+6            if(nums[i]==0){
+7                for(int j=i;j<i+3;j++){
+8                    nums[j]=1-nums[j];
+9            }
+10            count++;
+11
+12            }
+13            
+14        }
+15
+16        for(int n:nums){
+17            if (n!=1){
+18                return -1;
+19            }
+20        }
+21        
+22        return count;
+23    }
+24}
