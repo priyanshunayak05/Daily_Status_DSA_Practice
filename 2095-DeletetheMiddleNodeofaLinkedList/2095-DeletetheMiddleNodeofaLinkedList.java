@@ -1,4 +1,4 @@
-// Last updated: 2/2/2026, 11:45:43 AM
+// Last updated: 2/2/2026, 11:47:53 AM
 1/**
 2 * Definition for singly-linked list.
 3 * public class ListNode {
@@ -11,7 +11,7 @@
 10 */
 11class Solution {
 12    public ListNode deleteMiddle(ListNode head) {
-13        if(head==null || head.next==null){
+13        if(head.next==null){
 14            return null;
 15        }
 16        ListNode slow=head;
