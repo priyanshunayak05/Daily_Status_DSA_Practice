@@ -1,4 +1,4 @@
-// Last updated: 2/3/2026, 2:10:39 PM
+// Last updated: 2/3/2026, 3:15:39 PM
 1class Solution {
 2    public int totalSteps(int[] nums) {
 3        Stack<int[]>st=new Stack<>();
