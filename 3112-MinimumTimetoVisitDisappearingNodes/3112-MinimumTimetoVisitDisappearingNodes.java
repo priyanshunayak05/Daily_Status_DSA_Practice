@@ -1,4 +1,4 @@
-// Last updated: 1/2/2026, 11:54:00 AM
+// Last updated: 2/4/2026, 3:29:25 PM
 1class Solution {
 2    public int[] minimumTime(int n, int[][] edges, int[] disappear) {
 3        List<List<int[]>>adj=new ArrayList<>();
@@ -29,9 +29,9 @@
 28            int node=curr[0];
 29            int current_time=curr[1];
 30
-31            if(current_time >dist[node])continue;
-32            if(current_time >=disappear[node]){
-33                continue;
+31            if(current_time >dist[node])continue;  //Skip outdated / worse paths.
+32            if(current_time >=disappear[node]){  
+33                continue;  //Skip nodes that are gone (even if reached exactly at the disappearance moment).
 34            }
 35
 36            for(int[]nbrs:adj.get(node)){
