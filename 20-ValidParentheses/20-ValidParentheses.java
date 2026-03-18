@@ -1,44 +1,24 @@
-// Last updated: 11/4/2025, 11:39:35 PM
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
-class Solution {
-    public ListNode reverseKGroup(ListNode head, int k) {
-        ListNode temp=head;
-        int cnt=0;
-        //check if k node eist
-        while(cnt<k){
-            if(temp==null){
-                return head;
-            }
-            temp=temp.next;
-            cnt++;
-            
-        }
-        // Resursive call for rest LL
-        ListNode prev=reverseKGroup(temp,k);
-
-
-        //Reverse the current node
-        temp=head;
-        cnt=0;
-        while(cnt<k){
-            ListNode next=temp.next;
-            temp.next=prev;
-            prev=temp;
-            temp=next;
-
-            cnt++;
-
-        }
-        return prev;
-        
-    }
-}
+// Last updated: 3/18/2026, 7:39:52 PM
+1class Solution {
+2    public int longestValidParentheses(String s) {
+3        
+4        Stack<Integer>st=new Stack<>();
+5        st.push(-1);
+6        int maxlen=0;
+7        for(int i=0;i<s.length();i++){
+8            if(s.charAt(i)=='('){
+9                st.push(i);
+10            }
+11            else{
+12                st.pop();
+13                if(st.isEmpty()){
+14                    st.push(i);
+15                }
+16                else{
+17                    maxlen=Math.max(maxlen,i-st.peek());
+18                }
+19            }
+20        }
+21        return maxlen;
+22    }
+23}
